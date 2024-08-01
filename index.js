@@ -1,21 +1,25 @@
 // dependencies
 const http = require('http');
 const { hendelReqRes } = require('./helper/hendleReqRes');
+const environments = require('./helper/environments');
+const data = require('./lib/data');
 
 // app boject - model scaffolding
 const app = {};
 
+// test file create
+data.create('test', 'newFile', { name: 'Bangladesh', language: 'bangla' }, (err) => {
+    console.log('Error was', err);
+});
+
 // configuration
-app.config = {
-    port: 3000,
-};
 
 // create server
 app.createServer = () => {
     const server = http.createServer(app.hendelReqRes);
 
-    server.listen(app.config.port, () => {
-        console.log(`listening to port ${app.config.port}`);
+    server.listen(environments.port, () => {
+        console.log(`listening to port ${environments.port}`);
     });
 };
 
